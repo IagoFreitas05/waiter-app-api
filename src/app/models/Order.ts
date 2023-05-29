@@ -1,13 +1,13 @@
 import { Schema, model } from "mongoose";
 
-export const Category = model("Order", new Schema({
+export const Order = model("Order", new Schema({
   table: {
     type: String,
     required: true
   },
   status: {
     type: String,
-    enum:["WAITING","IN_PRODUCTION","D0NE"],
+    enum:["WAITING","IN_PRODUCTION","DONE"],
     default:"WAITING"
   },
   createdAt: {
