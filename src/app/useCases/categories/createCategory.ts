@@ -2,7 +2,18 @@ import { Request, Response } from "express";
 import { Category } from "../../models/Category";
 
 export async function createCategory(req: Request, res: Response){
-  const {icon, name} = req.body;
-  const category = await Category.create({icon, name});
-  res.json(category);
+  try{
+    const {icon, name} = req.body;
+    if(!name){
+      return res.status(400).json({
+        error:"Name is required"
+      });
+    }
+    const category = await Category.create({icon, name});
+    res.status(201).json(category);
+  }catch{
+    res.status(500).json({
+      error: "Internal server error"
+    });
+  }
 }
